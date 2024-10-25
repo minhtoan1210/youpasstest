@@ -1,21 +1,34 @@
 // src/components/Paragraph.js
-import React from 'react';
-import DropZone from './DropZone';
+import React from "react";
+import DropZone from "./DropZone";
 
-const Paragraph = ({ paragraph, blanks, answers, onDrop }) => {
+const Paragraph = ({
+  paragraph,
+  blanks,
+  answers,
+  onDrop,
+  isCheckColor,
+  isCheckReset,
+  setAnswers,
+}) => {
   const createParagraph = () => {
-    const parts = paragraph.split('[_input]');
+    let parts = paragraph.split("[_input]");
     return parts.map((part, index) => {
       if (index < blanks.length) {
         const blankId = blanks[index].id;
         const isCorrect = answers[blankId] === blanks[index].correctAnswer;
-        const dropZoneClass = isCorrect ? 'correct' : answers[blankId] ? 'incorrect' : '';
+        const dropZoneClass = isCorrect
+          ? "correct"
+          : answers[blankId]
+          ? "incorrect"
+          : "";
 
         return (
           <span key={index}>
             {part}
             <DropZone
               id={blankId}
+              isCheckColor={isCheckColor}
               answer={answers[blankId]}
               onDrop={onDrop}
               dropZoneClass={dropZoneClass} // Truyền class cho DropZone

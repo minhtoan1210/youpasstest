@@ -1,10 +1,11 @@
 // src/components/DropZone.js
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const DropZone = ({ id, answer, onDrop, dropZoneClass }) => {
+const DropZone = ({ id, answer, onDrop, dropZoneClass, isCheckColor }) => {
+
   return (
     <span
-      className={`dropzone ${dropZoneClass}`} // Thêm class vào span
+      className={isCheckColor ? `dropzone ${dropZoneClass}` : ""} // Thêm class vào span
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => onDrop(e, id)}
       style={{
@@ -14,7 +15,9 @@ const DropZone = ({ id, answer, onDrop, dropZoneClass }) => {
         display: 'inline-block',
       }}
     >
-      {answer || '_input'}
+      
+      { answer || '_input'}
+      
     </span>
   );
 };
